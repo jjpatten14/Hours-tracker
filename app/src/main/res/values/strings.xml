@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dayforce Tracker</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="company">Company</string>
+    <string name="login">Login</string>
+    <string name="view_results">View Results</string>
+    <string name="total_hours">Total Hours</string>
+    <string name="punch_in">Punch In</string>
+    <string name="punch_out">Punch Out</string>
+    <string name="extracting_data">Extracting timesheet data...</string>
+    <string name="login_failed">Login failed. Please check your credentials.</string>
+    <string name="no_data_found">No timesheet data found.</string>
+</resources>

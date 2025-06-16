@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="false">
+
+    <!-- Login Button (for Dayforce login after PIN authentication) -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Connect to Dayforce"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#1976D2"
+        android:layout_margin="20dp"
+        android:visibility="gone" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="#1976D2"
+        android:visibility="gone" />
+
+    <!-- Hidden WebView for Dayforce interaction -->
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" />
+
+    <!-- Results Display -->
+    <ScrollView
+        android:id="@+id/resultsScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#F8F9FA"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="60dp"
+            android:paddingBottom="20dp">
+
+            <!-- Header Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+                
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="32dp"
+                    android:background="#1976D2"
+                    android:layout_marginEnd="16dp" />
+                
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dayforce Pay Tracker"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="#1976D2"
+                        android:fontFamily="sans-serif-medium" />
+                        
+                    <TextView
+                        android:id="@+id/totalHoursText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last updated: Never"
+                        android:textSize="12sp"
+                        android:textColor="#6B7280"
+                        android:layout_marginTop="4dp" />
+                        
+                </LinearLayout>
+                
+            </LinearLayout>
+
+            <!-- Live Daily Tracking (Only When Working) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/liveDailyTrackingCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#FFFFFF"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+                        
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="24dp"
+                            android:background="#F59E0B"
+                            android:layout_marginEnd="12dp" />
+                        
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🕐 Live Daily Progress"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:fontFamily="sans-serif-medium" />
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WORKING"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="#FFFFFF"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#10B981"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp" />
+                            
+                    </LinearLayout>
+
+                    <!-- Daily Goal -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🎯"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp" />
+                        
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TODAY'S GOAL"
+                                android:textSize="11sp"
+                                android:textColor="#6B7280"
+                                android:textStyle="bold" />
+                                
+                            <TextView
+                                android:id="@+id/liveDailyGoalText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="8.0 hours"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                                
+                        </LinearLayout>
+                        
+                    </LinearLayout>
+
+                    <!-- Live Daily Earnings -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="💰"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp" />
+                        
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="EARNED TODAY (LIVE)"
+                                android:textSize="11sp"
+                                android:textColor="#6B7280"
+                                android:textStyle="bold" />
+                                
+                            <TextView
+                                android:id="@+id/liveDailyEarningsText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$0.00"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#10B981" />
+                                
+                        </LinearLayout>
+                        
+                    </LinearLayout>
+
+                    <!-- Daily Discrepancy -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📊"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp" />
+                        
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DAILY PROGRESS"
+                                android:textSize="11sp"
+                                android:textColor="#6B7280"
+                                android:textStyle="bold" />
+                                
+                            <TextView
+                                android:id="@+id/liveDailyDiscrepancyText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+0.0h ahead of goal"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#10B981"
+                                android:background="@drawable/rounded_background"
+                                android:backgroundTint="#F0FDF4"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp" />
+                                
+                        </LinearLayout>
+                        
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Pay Calculator Display -->
+            <LinearLayout
+                android:id="@+id/payDisplayLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone">
+
+                <!-- Main Pay Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="32dp"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#10B981"
+                            android:layout_marginBottom="16dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total Earnings"
+                            android:textSize="14sp"
+                            android:textColor="#6B7280"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:id="@+id/totalEarningsText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="$0.00"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="#10B981"
+                            android:gravity="center"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginBottom="12dp" />
+
+                        <TextView
+                            android:id="@+id/liveCounterText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Live: +$0.00/min"
+                            android:textSize="14sp"
+                            android:textColor="#059669"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#ECFDF5"
+                            android:padding="8dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Info Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="24dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="16dp">
+                            
+                            <View
+                                android:layout_width="3dp"
+                                android:layout_height="20dp"
+                                android:background="#3B82F6"
+                                android:layout_marginEnd="12dp" />
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hours Summary"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937"
+                                android:fontFamily="sans-serif-medium" />
+                                
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/currentRateText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Regular Rate: $20.00/hr"
+                            android:textSize="14sp"
+                            android:textColor="#6B7280"
+                            android:gravity="center"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:padding="12dp" />
+
+                        <TextView
+                            android:id="@+id/hoursInfoText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total: 0.0h | 40.0h until overtime"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Performance Dashboard Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <!-- Header Section -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="16dp">
+                            
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="24dp"
+                                android:background="#1976D2"
+                                android:layout_marginEnd="12dp" />
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Performance Dashboard"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="#1976D2"
+                                android:fontFamily="sans-serif-medium" />
+                                
+                        </LinearLayout>
+
+                        <!-- Today's Goal Row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:padding="12dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🎯"
+                                android:textSize="20sp"
+                                android:layout_marginEnd="12dp" />
+                                
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Today's Goal"
+                                    android:textSize="12sp"
+                                    android:textColor="#6B7280"
+                                    android:textStyle="bold" />
+                                    
+                                <TextView
+                                    android:id="@+id/dailyGoalText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="8.0 hours"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1F2937" />
+                                    
+                            </LinearLayout>
+                            
+                        </LinearLayout>
+
+                        <!-- Weekly Progress Row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="📊"
+                                android:textSize="20sp"
+                                android:layout_marginEnd="12dp" />
+                                
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                
+                                <!-- Weekly and Daily Earnings -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginBottom="8dp">
+                                    
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical"
+                                        android:layout_marginEnd="4dp">
+                                        
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="WEEK"
+                                            android:textSize="11sp"
+                                            android:textColor="#6B7280"
+                                            android:textStyle="bold" />
+                                            
+                                        <TextView
+                                            android:id="@+id/weeklyProgressText"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="$0.00"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="#059669" />
+                                            
+                                    </LinearLayout>
+                                    
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical"
+                                        android:layout_marginStart="4dp">
+                                        
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="TODAY"
+                                            android:textSize="11sp"
+                                            android:textColor="#6B7280"
+                                            android:textStyle="bold" />
+                                            
+                                        <TextView
+                                            android:id="@+id/dailyProgressText"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="$0.00"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="#059669" />
+                                            
+                                    </LinearLayout>
+                                    
+                                </LinearLayout>
+                                
+                                <!-- Weekly Goal Discrepancy -->
+                                <TextView
+                                    android:id="@+id/weeklyGoalDiscrepancyText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Goal: 40.0h | +0.0h over"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#10B981"
+                                    android:background="@drawable/rounded_background"
+                                    android:backgroundTint="#F0FDF4"
+                                    android:paddingStart="8dp"
+                                    android:paddingEnd="8dp"
+                                    android:paddingTop="4dp"
+                                    android:paddingBottom="4dp" />
+                                
+                            </LinearLayout>
+                            
+                        </LinearLayout>
+
+                        <!-- Loss Calculator (when working) -->
+                        <LinearLayout
+                            android:id="@+id/lossCalculatorLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#FEF2F2"
+                            android:padding="12dp"
+                            android:visibility="gone">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="⚠️"
+                                android:textSize="20sp"
+                                android:layout_marginEnd="12dp" />
+                                
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POTENTIAL LOSS"
+                                    android:textSize="11sp"
+                                    android:textColor="#DC2626"
+                                    android:textStyle="bold" />
+                                    
+                                <TextView
+                                    android:id="@+id/lossCalculatorText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Clock out now: -$0.00"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#DC2626" />
+                                    
+                            </LinearLayout>
+                            
+                        </LinearLayout>
+
+                        <!-- Divider -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#E5E7EB"
+                            android:layout_marginVertical="16dp" />
+
+                        <!-- Projected Section -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PROJECTIONS"
+                            android:textSize="11sp"
+                            android:textColor="#6B7280"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="12dp" />
+
+                        <!-- Projected OT Row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🚀"
+                                android:textSize="18sp"
+                                android:layout_marginEnd="12dp" />
+                                
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Overtime"
+                                    android:textSize="12sp"
+                                    android:textColor="#6B7280" />
+                                    
+                                <TextView
+                                    android:id="@+id/projectedOvertimeText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="8.0h = $240.00"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#7C3AED" />
+                                    
+                            </LinearLayout>
+                            
+                        </LinearLayout>
+
+                        <!-- Total Projected Pay Row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F0FDF4"
+                            android:padding="12dp">
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="💰"
+                                android:textSize="18sp"
+                                android:layout_marginEnd="12dp" />
+                                
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total Projected"
+                                    android:textSize="12sp"
+                                    android:textColor="#059669"
+                                    android:textStyle="bold" />
+                                    
+                                <TextView
+                                    android:id="@+id/projectedTotalPayText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="$1,800.00"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#059669" />
+                                    
+                            </LinearLayout>
+                            
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Action Buttons -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="24dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="20dp">
+                            
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="24dp"
+                                android:background="#8B5CF6"
+                                android:layout_marginEnd="12dp" />
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Quick Actions"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937"
+                                android:fontFamily="sans-serif-medium" />
+                                
+                        </LinearLayout>
+
+                        <!-- First Row of Buttons -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="12dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="6dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                app:cardBackgroundColor="#1976D2">
+
+                                <Button
+                                    android:id="@+id/refreshButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="72dp"
+                                    android:text="🔄&#10;Refresh"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:background="@android:color/transparent"
+                                    android:textAllCaps="false"
+                                    android:gravity="center"
+                                    android:lineSpacingExtra="2dp" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="6dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                app:cardBackgroundColor="#10B981">
+
+                                <Button
+                                    android:id="@+id/settingsButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="72dp"
+                                    android:text="⚙️&#10;Settings"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:background="@android:color/transparent"
+                                    android:textAllCaps="false"
+                                    android:gravity="center"
+                                    android:lineSpacingExtra="2dp" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <!-- Second Row of Buttons -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="6dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                app:cardBackgroundColor="#7C3AED">
+
+                                <Button
+                                    android:id="@+id/detailsButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="72dp"
+                                    android:text="📊&#10;Details"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:background="@android:color/transparent"
+                                    android:textAllCaps="false"
+                                    android:gravity="center"
+                                    android:lineSpacingExtra="2dp" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="6dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                app:cardBackgroundColor="#F59E0B">
+
+                                <Button
+                                    android:id="@+id/hoursReportButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="72dp"
+                                    android:text="⏰&#10;Hours"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:background="@android:color/transparent"
+                                    android:textAllCaps="false"
+                                    android:gravity="center"
+                                    android:lineSpacingExtra="2dp" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <!-- Timesheet Details (hidden by default) -->
+            <TextView
+                android:id="@+id/resultsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

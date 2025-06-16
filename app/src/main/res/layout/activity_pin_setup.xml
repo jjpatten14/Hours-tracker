@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8F9FA"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="32dp">
+
+        <!-- Header Section -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="32dp"
+                android:gravity="center">
+
+                <!-- App Icon -->
+                <View
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/rounded_background"
+                    android:backgroundTint="#1976D2"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Setup Security"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#1976D2"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/setupInstructionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Create a 4-digit PIN to secure your app"
+                    android:textSize="14sp"
+                    android:textColor="#6B7280"
+                    android:gravity="center"
+                    android:layout_marginBottom="32dp" />
+
+                <!-- PIN Display -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/pinDot1"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="○"
+                        android:textSize="24sp"
+                        android:textColor="#9CA3AF"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/pinDot2"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="○"
+                        android:textSize="24sp"
+                        android:textColor="#9CA3AF"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/pinDot3"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="○"
+                        android:textSize="24sp"
+                        android:textColor="#9CA3AF"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/pinDot4"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="○"
+                        android:textSize="24sp"
+                        android:textColor="#9CA3AF"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <!-- Biometric Enable Checkbox -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="24dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <CheckBox
+                        android:id="@+id/enableBiometricCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:buttonTint="#1976D2" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Enable biometric login (fingerprint/face)"
+                        android:textSize="14sp"
+                        android:textColor="#374151" />
+
+                </LinearLayout>
+
+                <!-- PIN Keypad -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <!-- Row 1: 1, 2, 3 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <Button
+                            android:id="@+id/pin1"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="1"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:layout_marginEnd="20dp" />
+
+                        <Button
+                            android:id="@+id/pin2"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="2"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:layout_marginEnd="20dp" />
+
+                        <Button
+                            android:id="@+id/pin3"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="3"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6" />
+
+                    </LinearLayout>
+
+                    <!-- Row 2: 4, 5, 6 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <Button
+                            android:id="@+id/pin4"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="4"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:layout_marginEnd="20dp" />
+
+                        <Button
+                            android:id="@+id/pin5"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="5"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:layout_marginEnd="20dp" />
+
+                        <Button
+                            android:id="@+id/pin6"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="6"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6" />
+
+                    </LinearLayout>
+
+                    <!-- Row 3: 7, 8, 9 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <Button
+                            android:id="@+id/pin7"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="7"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:layout_marginEnd="20dp" />
+
+                        <Button
+                            android:id="@+id/pin8"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="8"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:layout_marginEnd="20dp" />
+
+                        <Button
+                            android:id="@+id/pin9"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="9"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6" />
+
+                    </LinearLayout>
+
+                    <!-- Row 4: Clear, 0, Biometric -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/pinClear"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="⌫"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="#DC2626"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#FEF2F2"
+                            android:layout_marginEnd="20dp" />
+
+                        <Button
+                            android:id="@+id/pin0"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:text="0"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F3F4F6"
+                            android:layout_marginEnd="20dp" />
+
+                        <ImageButton
+                            android:id="@+id/biometricButton"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:src="@drawable/finger"
+                            android:background="@drawable/rounded_background"
+                            android:backgroundTint="#F0FDF4"
+                            android:scaleType="fitCenter"
+                            android:padding="8dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Biometric Setup Card (Initially Hidden) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/biometricSetupCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔎"
+                    android:textSize="48sp"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enable Biometric Login?"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#1F2937"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Use fingerprint or face unlock for faster access. You can always use your PIN as backup."
+                    android:textSize="14sp"
+                    android:textColor="#6B7280"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/skipBiometricButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Skip"
+                        android:textColor="#6B7280"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:layout_marginEnd="16dp"
+                        android:minWidth="100dp" />
+
+                    <Button
+                        android:id="@+id/enableBiometricButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Enable"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#1976D2"
+                        android:minWidth="120dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>

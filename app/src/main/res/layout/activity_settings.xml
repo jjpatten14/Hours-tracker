@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    android:fitsSystemWindows="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="32dp">
+            
+            <View
+                android:layout_width="4dp"
+                android:layout_height="32dp"
+                android:background="#1976D2"
+                android:layout_marginEnd="16dp" />
+            
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pay &amp; Goal Settings"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#1976D2"
+                    android:fontFamily="sans-serif-medium" />
+                    
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Configure your rates and daily goals"
+                    android:textSize="14sp"
+                    android:textColor="#6B7280"
+                    android:layout_marginTop="4dp" />
+                    
+            </LinearLayout>
+            
+        </LinearLayout>
+
+        <!-- Pay Rate Section -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Header with Show/Hide Button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="20dp"
+                        android:background="#10B981"
+                        android:layout_marginEnd="12dp" />
+                    
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Base Hourly Pay Rate"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937"
+                        android:fontFamily="sans-serif-medium" />
+                    
+                    <Button
+                        android:id="@+id/togglePayRateButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="👁️ Show"
+                        android:textSize="12sp"
+                        android:textColor="#10B981"
+                        android:background="@drawable/rounded_background"
+                        android:backgroundTint="#F0FDF4"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textAllCaps="false" />
+                        
+                </LinearLayout>
+
+                <!-- Pay Rate Content (Initially Hidden) -->
+                <LinearLayout
+                    android:id="@+id/payRateContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter your regular hourly wage (before overtime/premiums)"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Hourly rate"
+                    app:prefixText="$"
+                    app:suffixText="/hr"
+                    app:boxStrokeColor="#4CAF50"
+                    app:hintTextColor="#4CAF50">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/payRateEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textSize="16sp"
+                        android:textColor="#1F2937" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Pay Rate Preview -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:background="#f8f9fa"
+                    android:padding="12dp"
+                    android:radius="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rate Preview:"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#666666"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/regularRatePreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Regular: $20.00/hr"
+                        android:textSize="14sp"
+                        android:textColor="#10B981"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/overtimeRatePreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Overtime (1.5x): $30.00/hr"
+                        android:textSize="14sp"
+                        android:textColor="#F59E0B"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/sundayRatePreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Sunday Premium (2x): $40.00/hr"
+                        android:textSize="14sp"
+                        android:textColor="#DC2626"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Pay Period Section -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="20dp"
+                        android:background="#3B82F6"
+                        android:layout_marginEnd="12dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pay Period Schedule"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937"
+                        android:fontFamily="sans-serif-medium" />
+                        
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select how frequently you receive your paycheck"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="20dp" />
+
+                <RadioGroup
+                    android:id="@+id/payPeriodGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/weeklyRadio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="📅 Weekly (every 7 days)"
+                        android:textSize="16sp"
+                        android:textColor="#1F2937"
+                        android:textStyle="bold"
+                        android:checked="true"
+                        android:padding="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/rounded_background"
+                        android:backgroundTint="#F8F9FA"
+                        android:buttonTint="#1976D2" />
+
+                    <RadioButton
+                        android:id="@+id/biweeklyRadio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="📅 Bi-weekly (every 14 days)"
+                        android:textSize="16sp"
+                        android:textColor="#1F2937"
+                        android:textStyle="bold"
+                        android:padding="16dp"
+                        android:background="@drawable/rounded_background"
+                        android:backgroundTint="#F8F9FA"
+                        android:buttonTint="#1976D2" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Daily Goals Section -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="20dp"
+                        android:background="#F59E0B"
+                        android:layout_marginEnd="12dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Daily Hour Goals"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937"
+                        android:fontFamily="sans-serif-medium" />
+                        
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Set your target work hours for each day to track motivation and progress"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Weekdays Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="WEEKDAYS"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#6B7280"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Monday through Friday -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#F8F9FA">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Monday -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="📅 Monday"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeColor="#F59E0B"
+                                app:hintTextColor="#F59E0B"
+                                app:suffixText="h"
+                                app:boxCornerRadiusTopStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusBottomEnd="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/mondayGoalInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:hint="8.0"
+                                    android:textSize="14sp"
+                                    android:textColor="#1F2937"
+                                    android:gravity="center" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- Tuesday -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="📅 Tuesday"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeColor="#F59E0B"
+                                app:hintTextColor="#F59E0B"
+                                app:suffixText="h"
+                                app:boxCornerRadiusTopStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusBottomEnd="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/tuesdayGoalInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:hint="8.0"
+                                    android:textSize="14sp"
+                                    android:textColor="#1F2937"
+                                    android:gravity="center" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- Wednesday -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="📅 Wednesday"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeColor="#F59E0B"
+                                app:hintTextColor="#F59E0B"
+                                app:suffixText="h"
+                                app:boxCornerRadiusTopStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusBottomEnd="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/wednesdayGoalInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:hint="8.0"
+                                    android:textSize="14sp"
+                                    android:textColor="#1F2937"
+                                    android:gravity="center" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- Thursday -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="📅 Thursday"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeColor="#F59E0B"
+                                app:hintTextColor="#F59E0B"
+                                app:suffixText="h"
+                                app:boxCornerRadiusTopStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusBottomEnd="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/thursdayGoalInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:hint="8.0"
+                                    android:textSize="14sp"
+                                    android:textColor="#1F2937"
+                                    android:gravity="center" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- Friday -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="📅 Friday"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeColor="#F59E0B"
+                                app:hintTextColor="#F59E0B"
+                                app:suffixText="h"
+                                app:boxCornerRadiusTopStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusBottomEnd="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/fridayGoalInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:hint="8.0"
+                                    android:textSize="14sp"
+                                    android:textColor="#1F2937"
+                                    android:gravity="center" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Weekends Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="WEEKENDS"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#6B7280"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Saturday and Sunday -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#FEF3C7">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Saturday -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="🌅 Saturday"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeColor="#F59E0B"
+                                app:hintTextColor="#F59E0B"
+                                app:suffixText="h"
+                                app:boxCornerRadiusTopStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusBottomEnd="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/saturdayGoalInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:hint="7.0"
+                                    android:textSize="14sp"
+                                    android:textColor="#1F2937"
+                                    android:gravity="center" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- Sunday -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="☀️ Sunday"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#1F2937" />
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                app:boxStrokeColor="#F59E0B"
+                                app:hintTextColor="#F59E0B"
+                                app:suffixText="h"
+                                app:boxCornerRadiusTopStart="8dp"
+                                app:boxCornerRadiusTopEnd="8dp"
+                                app:boxCornerRadiusBottomStart="8dp"
+                                app:boxCornerRadiusBottomEnd="8dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/sundayGoalInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:hint="7.0"
+                                    android:textSize="14sp"
+                                    android:textColor="#1F2937"
+                                    android:gravity="center" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Projected Weekly Pay -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="20dp"
+                        android:background="#7C3AED"
+                        android:layout_marginEnd="12dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weekly Pay Projection"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937"
+                        android:fontFamily="sans-serif-medium" />
+                        
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estimated weekly earnings based on your daily goals"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Projection Display -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#F0FDF4">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="💰"
+                            android:textSize="24sp"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PROJECTED WEEKLY PAY"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#059669"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:id="@+id/projectedWeeklyPayText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$0.00"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:textColor="#059669"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:id="@+id/projectedHoursText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.0h total • 0.0h OT"
+                            android:textSize="14sp"
+                            android:textColor="#6B7280" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Security Settings Section -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="20dp"
+                        android:background="#DC2626"
+                        android:layout_marginEnd="12dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Security Settings"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937"
+                        android:fontFamily="sans-serif-medium" />
+                        
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Manage your PIN and biometric authentication settings"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Change PIN Button -->
+                <LinearLayout
+                    android:id="@+id/changePinButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/rounded_background"
+                    android:backgroundTint="#F8F9FA"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/newpin"
+                        android:scaleType="fitCenter"
+                        android:layout_marginEnd="12dp" />
+                        
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change PIN"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937" />
+
+                </LinearLayout>
+
+                <!-- Biometric Toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/rounded_background"
+                    android:backgroundTint="#F8F9FA"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        
+                        <ImageView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:src="@drawable/finger"
+                            android:layout_marginEnd="8dp" />
+                            
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Enable Biometric Login"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937" />
+                            
+                    </LinearLayout>
+
+                    <Switch
+                        android:id="@+id/biometricToggleSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumbTint="#DC2626"
+                        android:trackTint="#F3F4F6" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Dayforce Login Section -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="20dp"
+                        android:background="#2563EB"
+                        android:layout_marginEnd="12dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dayforce Login Credentials"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937"
+                        android:fontFamily="sans-serif-medium" />
+                        
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter your Dayforce username and password for automatic login"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Username Field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Username"
+                    app:startIconDrawable="@android:drawable/ic_menu_mylocation"
+                    app:boxStrokeColor="#2563EB"
+                    app:hintTextColor="#2563EB"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dayforceUsernameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="16sp"
+                        android:textColor="#1F2937" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    app:startIconDrawable="@android:drawable/ic_secure"
+                    app:endIconMode="password_toggle"
+                    app:boxStrokeColor="#2563EB"
+                    app:hintTextColor="#2563EB">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dayforcePasswordInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:textSize="16sp"
+                        android:textColor="#1F2937" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Test Login Button -->
+                <Button
+                    android:id="@+id/testDayforceLoginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="🔗 Test Dayforce Login"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#2563EB"
+                    android:background="@drawable/rounded_background"
+                    android:backgroundTint="#F0F7FF"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Overtime Rules Info -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="#e3f2fd">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ℹ️ Pay Calculation Rules"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#1976d2"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Regular rate for hours 1-40\n• Overtime (1.5x) for hours 40+\n• Sunday premium (2x) for Sunday hours ONLY if you've already worked 40+ hours that week"
+                    android:textSize="14sp"
+                    android:textColor="#1976d2"
+                    android:lineSpacingExtra="2dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textColor="#666666"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_marginEnd="16dp"
+                android:minWidth="100dp" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save Settings"
+                android:textColor="#ffffff"
+                android:background="#4CAF50"
+                android:minWidth="120dp" />
+
+        </LinearLayout>
+
+        <!-- Bottom spacing -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

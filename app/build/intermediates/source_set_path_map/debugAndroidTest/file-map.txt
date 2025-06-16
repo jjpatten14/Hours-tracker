@@ -1,0 +1,5 @@
+com.dayforcetracker.test.app-androidTest-0 C:\Users\jjpat\OneDrive\Desktop\dayforcetracker\app\build\generated\res\resValues\androidTest\debug
+com.dayforcetracker.test.app-androidTest-1 C:\Users\jjpat\OneDrive\Desktop\dayforcetracker\app\build\generated\res\rs\androidTest\debug
+com.dayforcetracker.test.app-mergeDebugAndroidTestResources-2 C:\Users\jjpat\OneDrive\Desktop\dayforcetracker\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.dayforcetracker.test.app-mergeDebugAndroidTestResources-3 C:\Users\jjpat\OneDrive\Desktop\dayforcetracker\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.dayforcetracker.test.app-merged_res-4 C:\Users\jjpat\OneDrive\Desktop\dayforcetracker\app\build\intermediates\merged_res\debugAndroidTest

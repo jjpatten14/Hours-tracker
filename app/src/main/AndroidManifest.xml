@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:label="Dayforce Pay Tracker"
+        android:theme="@style/AppTheme">
+        
+        <!-- Launcher Activity - Entry point for authentication flow -->
+        <activity
+            android:name=".LauncherActivity"
+            android:exported="true"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- PIN Setup Activity - First time setup -->
+        <activity
+            android:name=".PinSetupActivity"
+            android:exported="false"
+            android:noHistory="true"
+            android:label="Setup Security" />
+        
+        <!-- PIN Login Activity - Authentication -->
+        <activity
+            android:name=".PinLoginActivity"
+            android:exported="false"
+            android:noHistory="true"
+            android:label="Unlock App" />
+        
+        <!-- Main Activity - App content -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="Dayforce Pay Tracker" />
+        
+        <!-- Settings Activity -->
+        <activity 
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false"
+            android:label="Pay Settings" />
+    </application>
+
+</manifest>
